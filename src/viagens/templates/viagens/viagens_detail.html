@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% comment %} {% load crispy_objects_tags %} {% endcomment %}
+
+{% block content %}
+<header>
+    <nav  class="navbar navbar-expand-lg navbar-dark navbar-sm {% block navbar %} bg-primary {% endblock %}">
+
+        {% if  object.list  %}
+                <a class="navbar-brand flex-grow-1 text-center small-title" style="color: #fff; left: 50%; transobject: translateX(-50%); position: relative">
+                 
+            {% else %}
+                <a class="navbar-brand flex-grow-1 text-center small-title" style="color: #fff; left: 50%; transobject: translateX(-50%); position: relative;" href="{% url 'm_inclue' %}">
+                
+                 </a>
+            {% endif %}
+            <div><center>ROTINA DIARIA</center></div>
+    </nav>
+  </header>
+</div>
+                <div class="container mt-12" style="width: 95%  font-size: 14px" >
+                    {% comment %} <object method="POST" class="card p-3" autocomplete="off">
+                        {% csrf_token %} {% endcomment %}
+                        <div class="col">
+                            <div class="row">
+                                 <div class="col-4"> Solicitado em:<br> {{ object.horariosolicitado }}</div>
+                                 <div class="col-4"> Tipo Solicitação<br>{{ object.tiposolicitacao}} </div>
+                            </div>                      
+                            <div class="row">
+                                <div class="col-4">Servidor<br>{{ object.servidor}}</div>
+                                <div class="col-4">Setor <br>{{ object.setor}}
+                            </div>
+                            <div class="row">
+                              <div class="col-4">Data Agendada<br>{{ object.dataagendamento}}</div>
+                                <div class="col-8"> Itinerario<br>{{ object.itinerario}}</div>
+                            </div>
+                        </div>
+                       <div class="col">
+                            <center>Atendimento</center>
+                            <div class="row>">
+                                 <div class="col-4"> Data Atendimento<br> {{ object.dataatendimento}} </div>
+                                 <div class="col-4"> Motorista <br>{{ object.motorista}} </div>
+                                 <div class="col-4"> Veículo<br>{{ object.veiculo}} </div>
+                            </div>
+                            <div class=row>
+                                <div class="col-4"> Km Inicial<br>{{ object.kminicial}}</div>
+                                <div class="col-4"> Retorno<br>{{ object.retorno}}</div>
+                                <div class="col-4"> Km Final<br>{{ object.kmfinal}}</div>
+                            </div>
+                       </div>
+
+                       <div="row">
+                        <input type="submit" onclick="location.href='{% url 't_lista'  %}'" value='Voltar'>  
+
+                    <!-- Message from backend -->
+                    {% for message in messages %}
+                        {% if message.tags == 'success' %}
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">{{ message}}
+                                <a href="{% url 't_lista' %}" type="button" class="btn btn-close" data-bs-dismiss="alert" arial-label="Fechar"></a>         
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            
+{% endblock %}

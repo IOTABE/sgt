@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+    <nav  class="navbar navbar-expand-lg navbar-dark navbar-sm {% block navbar %} bg-primary {% endblock %}">
+
+        {% if  object.list  %}
+                <a class="navbar-brand flex-grow-1 text-center small-title" style="color: #fff; left: 50%; transform: translateX(-50%); position: relative">
+                 
+            {% else %}
+                <a class="navbar-brand flex-grow-1 text-center small-title" style="color: #fff; left: 50%; transform: translateX(-50%); position: relative;" href="{% url 'v_inclue' %}">
+                
+                 </a>
+            {% endif %}
+    </nav>
+    <div><center>CADASTRO DE VEÍCULOS</center></div>
+  </header>
+</div>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Excluindo Veiculo</h1>
+</div>
+
+<div class="col-md-9 ms-sm-auto col-lg 10 px md 4">
+    Tem certeza que deseja apagar o Veiculo : '{{ object.modelo }}'
+    <br />
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Sim">
+    <input type="reset" onclick="location.href='{% url 'v_lista' %}'" value='Não'>
+             
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div><center>
+    <ul>
+    {% for motorista in motoristas %}
+        <p>{{motorista.id}} - {{ motorista.nome }} - Editar - Deletar</p>
+    {% endfor %}
+    </ul></center>
+</div>
+<div><center>
+    <form action="">
+        <input type="text" name="">
+    </form>
+</center>
+</div>
+
+{% endblock %}

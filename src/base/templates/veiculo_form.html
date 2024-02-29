@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<header>
+    <nav  class="navbar navbar-expand-lg navbar-dark navbar-sm {% block navbar %} bg-primary {% endblock %}">
+
+        {% if  object.list  %}
+                <a class="navbar-brand flex-grow-1 text-center small-title" style="color: #fff; left: 50%; transform: translateX(-50%); position: relative">  
+            {% else %}
+                <a class="navbar-brand flex-grow-1 text-center small-title" style="color: #fff; left: 50%; transform: translateX(-50%); position: relative;" href="{% url 'v_inclue' %}">
+                 </a>
+            {% endif %}
+    </nav>
+    <div><center>CADASTRO DE VEÍCULOS</center></div>
+  </header>
+</div>
+                <div class="container mt-12" style="width: 95%  font-size: 14px" >
+                    <form method="POST" class="card p-3" autocomplete="off">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-8">{{ form.modelo|as_crispy_field }}</div>
+                            <div class="col-8">{{ form.placa|as_crispy_field }}</div>
+                            <div class="col-8">{{ form.odometro|as_crispy_field }}</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-5">Enviar</button>
+                    </form>
+
+                    <!-- Message from backend -->
+                    {% for message in messages %}
+                        {% if message.tags == 'success' %}
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">{{ message}}
+                                <a href="{% url 'v_lista' %}" type="button" class="btn btn-close" data-bs-dismiss="alert" arial-label="Fechar"></a>         
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            
+{% endblock %}

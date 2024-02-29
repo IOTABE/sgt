@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div classe='wrapper'>
+<header>
+    <div><center>---- AGENDAMENTO ----</center></div>
+    <nav  class="navbar navbar-expand-lg navbar-dark navbar-sm {% block navbar %} bg-primary {% endblock %}">
+              {% if  object.list  %}
+                <a class="navbar-brand flex-grow-1 text-center small-title" style="color: #fff; left: 50%; transform: translateX(-50%); position: relative">
+                <i class="fas fa-user-plus"></i>&nbsp;&nbsp; ADD AGENDAMENTO 
+            {% else %}
+                <a class="navbar-brand flex-grow-1 text-center small-title" style="color: #fff; left: 50%; transform: translateX(-50%); position: relative;" href="{% url 't_inclue' %}">
+                <i class="fas fa-user-plus"></i>&nbsp;&nbsp; ADD AGENDAMENTO
+                 </a>
+            {% endif %}
+                </nav>
+  </header>
+</div>
+<div class="container mt-12" style="width: 95%  font-size: 14px" >
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Data Agendada</th>
+                <th scope="col">Solicitante</th>
+                <th scope="col">Setor</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for ig in object_list %}
+            <tr>
+                <td>{{ig.id}}</td>
+                <td>{{ig.dataagendamento}}</td>
+                <td>{{ig.servidor}}</td>
+                <td>{{ig.setor}}</td>
+                <td><a href= "{% url 'det_viagem' pk=ig.id %}"> <button type='button' class='btn btn-primary' >Visualizar</button></a>
+                <a href= "{% url 'upd_viagem' pk=ig.id %}"> <button type='button' class='btn btn-secondary'>Atender</button></a>
+                <a href= "{% url 'del_viagem' pk=ig.id %}"> <button type='button' class='btn btn-danger' >Apagar</button></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

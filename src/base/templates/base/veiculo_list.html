@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div classe='wrapper'>
+<header>
+    <div><center>CADASTRO DE VEÍCULOS</center></div>
+    <nav  class="navbar navbar-expand-lg navbar-dark navbar-sm {% block navbar %} bg-primary {% endblock %}">
+              {% if  object.list  %}
+                <a class="navbar-brand flex-grow-1 text-center small-title" style="color: #fff; left: 50%; transform: translateX(-50%); position: relative">
+                <i class="fas fa-user-plus"></i>&nbsp;&nbsp; ADD VEÍCULO  
+            {% else %}
+                <a class="navbar-brand flex-grow-1 text-center small-title" style="color: #fff; left: 50%; transform: translateX(-50%); position: relative;" href="{% url 'v_inclue' %}">
+                <i class="fas fa-user-plus"></i>&nbsp;&nbsp; ADD VEÍCULO
+                 </a>
+            {% endif %}
+                </nav>
+  </header>
+</div>
+<div class="container mt-12" style="width: 95%  font-size: 14px" >
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Placa</th>
+                <th scope="col">Odometro Atual</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ig in object_list %}
+            <tr>
+                <td>{{ig.id}}</td>
+                <td>{{ig.modelo}}</td>
+                <td>{{ig.placa}}</td>
+                <td>{{ig.odometro}}</td>
+                <td><a href= "{% url 'det_veiculo' pk=ig.id %}"> <button type='button' class='btn btn-primary' >Visualizar</button></a>
+                <a href= "{% url 'upd_veiculo' pk=ig.id %}"> <button type='button' class='btn btn-secondary'>Editar</button></a>
+                <a href= "{% url 'del_veiculo' pk=ig.id %}"> <button type='button' class='btn btn-danger' >Apagar</button></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

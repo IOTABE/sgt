@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% comment %} {% load crispy_objects_tags %} {% endcomment %}
+
+{% block content %}
+<header>
+    <nav  class="navbar navbar-expand-lg navbar-dark navbar-sm {% block navbar %} bg-primary {% endblock %}">
+
+        {% if  object.list  %}
+                <a class="navbar-brand flex-grow-1 text-center small-title" style="color: #fff; left: 50%; transform: translateX(-50%); position: relative">
+                 
+            {% else %}
+                <a class="navbar-brand flex-grow-1 text-center small-title" style="color: #fff; left: 50%; transform: translateX(-50%); position: relative;" href="{% url 'm_inclue' %}">
+                
+                 </a>
+            {% endif %}
+    </nav>
+    <div><center>CADASTRO DE MOTORISTAS</center></div>
+  </header>
+</div>
+                <div class="container mt-12" style="width: 95%  font-size: 14px" >
+                    {% comment %} <object method="POST" class="card p-3" autocomplete="off">
+                        {% csrf_token %} {% endcomment %}
+                        <div class="row">
+                            <div class="col-8">Nome:<br />{{ object.nome }}</div>
+                        </div><br/>
+                        <input type="submit" onclick="location.href='{% url 'm_lista'  %}'" value='Voltar'>  
+
+                    <!-- Message from backend -->
+                    {% for message in messages %}
+                        {% if message.tags == 'success' %}
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">{{ message}}
+                                <a href="{% url 'm_lista' %}" type="button" class="btn btn-close" data-bs-dismiss="alert" arial-label="Fechar"></a>         
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            
+{% endblock %}

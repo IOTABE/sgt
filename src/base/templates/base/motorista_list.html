@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div classe='wrapper'>
+<header>
+    <div><center>CADASTRO DE MOTORISTAS</center></div>
+    <nav  class="navbar navbar-expand-lg navbar-dark navbar-sm {% block navbar %} bg-primary {% endblock %}">
+
+        {% if  object.list  %}
+                <a class="navbar-brand flex-grow-1 text-right small-title" style="color: #fff; left: 50%; transform: translateX(-50%); position: relative">
+                <i class="fas fa-user-plus"></i>&nbsp;&nbsp; ADD MOTORISTA  
+            {% else %}
+                <a class="navbar-brand flex-grow-1 text-right small-title" style="color: #fff; left: 50%; transform: translateX(-50%); position: relative;" href="{% url 'm_inclue' %}">
+                <i class="fas fa-user-plus"></i>&nbsp;&nbsp; ADD MOTORISTA
+                 </a>
+            {% endif %}
+    </nav>
+
+  </header>
+</div>
+<div class="container mt-12" style="width: 95%  font-size: 14px" >
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Motorista</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ig in object_list %}
+            <tr>
+                <td>{{ig.id}}</td>
+                <td>{{ig.nome}}</td>
+                <td><a href= "{% url 'det_motorista' pk=ig.id %}"> <button type='button' class='btn btn-primary' >Visualizar</button></a>
+                <a href= "{% url 'upd_motorista' pk=ig.id %}"> <button type='button' class='btn btn-secondary'>Editar</button></a>
+                <a href= "{% url 'del_motorista' pk=ig.id %}"> <button type='button' class='btn btn-danger' >Apagar</button></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
