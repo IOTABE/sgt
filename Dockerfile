@@ -1,4 +1,4 @@
-FROM python:3.10.2-slim
+FROM python:3.11.8-slim-bullseye
 
 RUN apt update && apt install -y --no-install-recommends \
     default-jre \
@@ -17,7 +17,8 @@ RUN apt update && apt install -y --no-install-recommends \
 
 RUN useradd -ms /bin/bash python
 
-RUN pip install pdm
+RUN pip install pdm 
+
 
 USER python
 
@@ -45,3 +46,8 @@ RUN echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc && \
 # RUN echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc && \
 #   echo 'HISTFILE=/home/python/zsh/.zsh_history' >> ~/.zshrc
 
+RUN pip install -r requirements.txt
+
+RUN python manage.py migrate
+
+RUN python manage.py collectstatic
